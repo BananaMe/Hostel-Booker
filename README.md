@@ -33,6 +33,7 @@ Navigate to the root directory of the repository and run the following command t
 
 ```bash
 dotnet restore
+npm install # in the frontend directory
 ```
 
 ### Build and run the project
@@ -41,6 +42,7 @@ Use the following commands to build and run the project:
 ```bash
 dotnet build
 dotnet run
+npm start # in the frontend directory
 ```
 The project will be available at http://localhost:3000.
 To see the Swagger build go to http://localhost:5018/swagger/index.html
