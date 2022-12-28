@@ -24,7 +24,14 @@ public class HostelController
     [Route("get_all_hostels")]
     public IEnumerable<Hostel> GetAllHostels()
     {
-        return _context.Hostels.Include(h => h.Rooms);
+        return _context.Hostels;
+    }
+    
+    [HttpGet]
+    [Route("get_hostel")]
+    public Hostel GetHostel([FromQuery(Name = "id")] int hostelID)
+    {
+        return _context.Hostels.FirstOrDefault(h => h.HostelID == hostelID);
     }
 
     [HttpPost]

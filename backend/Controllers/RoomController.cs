@@ -20,9 +20,9 @@ public class RoomController
 
     [HttpGet]
     [Route("get_all_rooms")]
-    public IEnumerable<Room> GetAllRooms()
+    public IEnumerable<Room> GetAllRooms(int hostelId)
     {
-        return _context.Rooms;
+        return _context.Hostels.Include(h => h.Rooms).FirstOrDefault(h => h.HostelID == hostelId).Rooms;
     }
 
     [HttpPost]

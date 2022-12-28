@@ -19,15 +19,12 @@
   color: white;
 }
 
-.link {
-  color: #b318f0;
+ div {
+  text-align: left;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input, label, small, button, select {
+  margin-left: 1%;
+  display: flex;
+  margin-bottom: 0.5%;
 }

@@ -11,7 +11,7 @@ public class Room
 
     public int RoomNumber { get; set; }
     public int GuestCapacity { get; set; }
-    public ICollection<Reservation> Reservations { get; set; }
+    public ICollection<Reservation>? Reservations { get; set; }
 
     public Room(int roomNum, int guestCapacity)
     {
