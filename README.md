@@ -44,5 +44,6 @@ dotnet build
 dotnet run
 npm start # in the frontend directory
 ```
-The project will be available at http://localhost:3000.
+The project will be available at http://localhost:3000
+<br />
 To see the Swagger build go to http://localhost:5018/swagger/index.html
