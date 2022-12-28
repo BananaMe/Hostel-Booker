@@ -59,6 +59,8 @@ public class HostelController
         _context.SaveChanges();
     }
 
+
+        
     [HttpPost]
     [Route("get_available_rooms")]
     public IEnumerable<Room> GetAvailableRooms(CheckAvailabilityData data)
@@ -80,5 +82,22 @@ public class HostelController
                         || (reservation.EndDate < endDate && reservation.EndDate < startDate)
                 )
         );
+    }
+
+    [HttpPut]
+    [Route("update_hostel")]
+    public void UpdateHostel(Hostel hostel)
+    {
+        _context.Hostels.Update(hostel);
+        _context.SaveChanges();
+    }
+    
+    [HttpDelete]
+    [Route("delete_hostel")]
+    public void DeleteHostel([FromQuery(Name = "id")] int hostelID)
+    {
+        var hostel = _context.Hostels.FirstOrDefault(h => h.HostelID == hostelID);
+        _context.Remove(hostel);
+        _context.SaveChanges();
     }
 }

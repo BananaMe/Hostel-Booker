@@ -18,13 +18,22 @@ public class RoomController
 
     public record AddReservationData(Reservation Reservation, int RoomId);
 
+    public record DeleteReservationData(int ReservationId, int RoomId);
+
     [HttpGet]
-    [Route("get_all_rooms")]
-    public IEnumerable<Room> GetAllRooms(int hostelId)
+    [Route("get_hostel_rooms")]
+    public IEnumerable<Room> GetHostelRooms(int hostelId)
     {
         return _context.Hostels.Include(h => h.Rooms).FirstOrDefault(h => h.HostelID == hostelId).Rooms;
     }
 
+    [HttpGet]
+    [Route("get_all_reservations")]
+    public IEnumerable<Reservation> GetAllReservations(int roomId)
+    {
+        return _context.Rooms.FirstOrDefault(r => r.RoomID == roomId).Reservations;
+    }
+    
     [HttpPost]
     [Route("add_reservation")]
     public void AddReservation(AddReservationData data)
@@ -36,6 +45,19 @@ public class RoomController
             .FirstOrDefault(r => r.RoomID == roomId);
         room.Reservations.Add(reservation);
         _context.Rooms.Update(room);
+        _context.SaveChanges();
+    }
+    
+    [HttpDelete]
+    [Route("delete_reservation")]
+    public void DeleteReservation(DeleteReservationData data)
+    {
+        var reservationId = data.ReservationId;
+        var roomId = data.RoomId;
+        var reservation = _context.Reservations.FirstOrDefault(r => r.ReservationID == reservationId);
+        var room = _context.Rooms
+            .Include(r => r.Reservations).FirstOrDefault(r => r.RoomID == roomId);
+        _context.Reservations.Remove(reservation);
         _context.SaveChanges();
     }
 }
