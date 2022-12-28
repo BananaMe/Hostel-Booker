@@ -5,5 +5,42 @@ rooms and storing room details. Made using Asp .NET Core 7 and SolidJS typescrip
 
 **It is not fully functioning with some missing CRUD operations and a responsive frontend.**
 
-The app  can perform some tasks like add hostels, updat hostels (by changing the name of the hostel) read a specific hostel (returns the name) or all registered hostels, delete specific hostel (by entering the id of the hostel), adding rooms, updating rooms (WIP), read available rooms (returns registered rooms in a hostel that are available on the specified date range - WIP), delete specific room (by entering the room id and the hostel id the room belongs to), add a guest (by entering the guest's name), read a specific guest (by entering their id) or all registered guests, delete specific guest ( by entering their id)
+The app  can perform some tasks like:
+* **Hostels:** add hostels, update hostels (by changing the name of the hostel) read a specific hostel (returns the name) or all registered hostels, delete specific hostel (by entering the id of the hostel);
+* **Rooms:** add rooms, updating rooms (WIP), read available rooms (returns registered rooms in a hostel that are available on the specified date range - WIP), delete specific room (by entering the room id and the hostel id the room belongs to);
+* **Guest:** add a guest (by entering the guest's name), read a specific guest (by entering their id) or all registered guests, delete specific guest ( by entering their id).
 
+
+## Tech
+
+- SolidJS - frontend
+- ASP .NET Core 7 Entity Framework - backend
+- Swagger - Documentation for HTTP Requests
+
+## Installation Guide
+
+### Prerequisites
+- .NET Core 7 SDK
+- Visual Studio (optional, but recommended)
+### Clone the repository
+Clone the repository onto your machine using the following command:
+
+```bash
+git clone https://github.com/<your-username>/<your-repository>.git
+```
+### Install dependencies
+Navigate to the root directory of the repository and run the following command to install the necessary dependencies:
+
+```bash
+dotnet restore
+```
+
+### Build and run the project
+Use the following commands to build and run the project:
+
+```bash
+dotnet build
+dotnet run
+```
+The project will be available at http://localhost:3000.
+To see the Swagger build go to http://localhost:5018/swagger/index.html
