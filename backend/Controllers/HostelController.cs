@@ -16,8 +16,10 @@ public class HostelController
         _context = context;
     }
 
-    public record RoomAndHostel(Room room, int hostelId);
+    public record RoomAndHostelData(Room room, int hostelId);
+    public record UpdateRoomData(Room room, int roomId, int hostelId);
 
+    public record DeleteRoomData(int roomId, int hostelId);
     public record CheckAvailabilityData(DateOnly StartDate, DateOnly EndDate, int HostelId);
 
     [HttpGet]
@@ -44,7 +46,7 @@ public class HostelController
 
     [HttpPost]
     [Route("add_room")]
-    public void AddRoom(RoomAndHostel data)
+    public void AddRoom(RoomAndHostelData data)
     {
         var room = data.room;
         var hostelId = data.hostelId;
@@ -59,8 +61,33 @@ public class HostelController
         _context.SaveChanges();
     }
 
+    [HttpDelete]
+    [Route("delete_hostel_room")]
+    public void DeleteHostelRoom(DeleteRoomData data)
+    {
+        var roomId = data.roomId;
+        var hostelId = data.hostelId;
 
+        var room = _context.Rooms
+            .FirstOrDefault(r => r.RoomID == roomId);
+        _context.Rooms.Remove(room);
+        _context.SaveChanges();
+    }
+
+    [HttpPut]
+    [Route("update_hostel_room")]
+    public void UpdateHostelRoom(UpdateRoomData data)
+    {
+        var roomId = data.roomId;
+        var hostelId = data.hostelId; 
         
+        var room = _context.Hostels
+            .Include(h => h.Rooms)
+            .FirstOrDefault(h => h.HostelID == hostelId);
+        _context.Hostels.Update(room);
+        _context.SaveChanges();
+    }    
+   
     [HttpPost]
     [Route("get_available_rooms")]
     public IEnumerable<Room> GetAvailableRooms(CheckAvailabilityData data)
@@ -94,9 +121,11 @@ public class HostelController
     
     [HttpDelete]
     [Route("delete_hostel")]
-    public void DeleteHostel([FromQuery(Name = "id")] int hostelID)
+    public void DeleteHostel([FromQuery(Name = "id")] int hostelId)
     {
-        var hostel = _context.Hostels.FirstOrDefault(h => h.HostelID == hostelID);
+        var hostel = _context.Hostels
+            .Include(r => r.Rooms)
+            .FirstOrDefault(h => h.HostelID == hostelId);
         _context.Remove(hostel);
         _context.SaveChanges();
     }

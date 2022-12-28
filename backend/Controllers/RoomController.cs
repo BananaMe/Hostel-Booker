@@ -24,12 +24,13 @@ public class RoomController
     [Route("get_hostel_rooms")]
     public IEnumerable<Room> GetHostelRooms(int hostelId)
     {
-        return _context.Hostels.Include(h => h.Rooms).FirstOrDefault(h => h.HostelID == hostelId).Rooms;
+        return _context.Hostels.Where(h => h.Rooms.Any()).FirstOrDefault(h => h.HostelID == hostelId)?.Rooms;
     }
+    
 
     [HttpGet]
-    [Route("get_all_reservations")]
-    public IEnumerable<Reservation> GetAllReservations(int roomId)
+    [Route("get_reservation")]
+    public IEnumerable<Reservation> GetReservation(int roomId)
     {
         return _context.Rooms.FirstOrDefault(r => r.RoomID == roomId).Reservations;
     }

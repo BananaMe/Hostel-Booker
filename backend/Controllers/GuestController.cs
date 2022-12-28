@@ -36,4 +36,13 @@ public class GuestController
         _context.Guests.Add(new Guest(Ime));
         _context.SaveChanges();
     }
+    
+    [HttpDelete]
+    [Route("delete_guest")]
+    public void DeleteGuest([FromQuery(Name = "id")] int guestId)
+    {
+        var guest = _context.Guests.FirstOrDefault(g => g.GuestID == guestId);
+        _context.Remove(guest);
+        _context.SaveChanges();
+    }
 }
