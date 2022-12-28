@@ -26,7 +26,7 @@ The app  can perform some tasks like:
 Clone the repository onto your machine using the following command:
 
 ```bash
-git clone https://github.com/<your-username>/<your-repository>.git
+git clone https://github.com/<BananaMe>/<Hostel-Booker>.git
 ```
 ### Install dependencies
 Navigate to the root directory of the repository and run the following command to install the necessary dependencies:
